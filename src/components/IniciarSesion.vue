@@ -1,14 +1,16 @@
 <template>
+    <!--CAMBIO DE EMAIL POR USERNAME EN V-MODEL Y PREVENT LOGIN-->
     <div>
         <div class="col-sm-4-body">
-            <p class="text">Si aún no te has registrado ve a la pestaña <span>Registrarse</span> </p>
-            <form @submit.prevent="Login">
+            <p class="text">Si aún no te has registrado, ve a la pestaña <span>Registrarse</span> </p>
+            <form @submit.prevent="login">
                 <div>
                     <input 
                         class="col-sm-4-body-input-1" 
-                        type="email" 
-                        placeholder="Correo electrónico"
-                        v-model="email"
+                        type="text" 
+                        placeholder="Usuario" 
+                        v-model="username"
+                        required
                     >
                 </div>
                 
@@ -18,17 +20,23 @@
                         type="password" 
                         placeholder="Contraseña"
                         v-model="password"
+                        required
                     >
+                </div>
+
+                <div> <!--CAMBIO DE TEXTO ERROR-->
+                    <p v-if="error" class="error">Ingresaste mal algún dato.</p>
                 </div>
                 
                 <div>
                     <button 
                         class="btn-login" 
+                        value="Login"
                         type="submit">Ingresar
                     </button>
                 </div>
              </form> 
-                <p>{{loginError}}</p>
+            
                 <div class="col-sm-4-body-secondtext">
                     <a>¿Olvidaste tu contraseña?</a>
                 </div>
@@ -40,32 +48,34 @@
 </template>
 
 <script>
-import firebase from 'firebase/app'
+//import firebase from 'firebase/app'
 import { mapActions, mapState } from "vuex"
- 
+
+/***** CÓDIGO CON AXIOS *****/
+
+import auth from "@/logic/auth";
+
 export default {
     name: 'IniciarSesion',
-    data() {
-        return {
-            email: '',
-            password: ''
-        }
-    },
+        data: () => ({
+                username: "",
+                password: "",
+                error: false
+  }),
 
     methods: {
-        ...mapActions(['loginUserAction']),
-        Login() {
-            this.loginUserAction({
-                email: this.email,
-                password: this.password
-            })
-        }
-    },
-
-    computed: {
-        ...mapState(['loginError'])
+    async login() {
+      try {
+        await auth.login(this.username, this.password);
+        this.$router.push("../views/MisCompras.vue");
+      } catch (error) {
+        this.error = true;
+      }
     }
+  },
 }
+
+
 </script>
 
 <style scoped>

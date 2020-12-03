@@ -69,8 +69,8 @@ export default new Vuex.Store({
           commit('getCursosMutation', data);
       })
     },
-
-    /* OBTENER UN CURSO DESDE DJANGO REST FRAMEWORK POR ID */
+    
+    /* OBTENER UN CURSO DESDE DJANGO REST FRAMEWORK */
     async getCursoAction({commit}, id) {
       fetch(`https://cors-anywhere.herokuapp.com/https://pure-caverns-90685.herokuapp.com/api/programas/${id}`, {
         method: 'GET'
@@ -88,7 +88,8 @@ export default new Vuex.Store({
       commit('addCarritoMutation', curso)
     },
 
-    /*CREAR UN NUEVO USUARIO EN FIREBASE*/
+    /*
+    CREAR UN NUEVO USUARIO EN FIREBASE
     nuevoUsuarioAction({commit}, usuario){
       auth.createUserWithEmailAndPassword(usuario.email, usuario.password)
         .then(res => {
@@ -105,8 +106,10 @@ export default new Vuex.Store({
           commit('nuevoUsuarioMutationError', error.message)
         })
     },
+    */
 
-    /*INICIAR SESION CON FIREBASE*/
+    /*
+    INICIAR SESION CON FIREBASE
     loginUserAction({commit}, usuario){
       auth.signInWithEmailAndPassword(usuario.email, usuario.password)
         .then(res => {
@@ -118,7 +121,7 @@ export default new Vuex.Store({
           commit('loginUserMutationError', error.message)
         })
     },
-
+    */
     
   },
 

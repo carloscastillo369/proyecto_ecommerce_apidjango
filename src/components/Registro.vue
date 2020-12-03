@@ -2,7 +2,7 @@
     <div>
         <div class="col-sm-4-body">
             <p class="text">Si ya tienes una cuenta ve a la pestaña <span>Iniciar Sesion</span> </p>
-            <form @submit.prevent="SignIn">
+            <form @submit.prevent="register">
                 <div>
                     <input 
                         class="col-sm-4-body-input-1" 
@@ -38,6 +38,9 @@
                         v-model="pass2"
                     >
                 </div>
+                <div>
+                    <label class="form-label" for="#password-repeat">Repite la contraseña:</label>
+                </div>
            
                 <div>
                     <input 
@@ -53,7 +56,7 @@
                 </div>
             </form>
 
-            <p>{{error}}</p>
+            <!--<p>{{error}}</p>-->
 
             <a href="/" class="salir">Salir del registro</a>
         </div>
@@ -62,36 +65,25 @@
 
 <script>
 import { mapActions, mapState } from "vuex"
+import auth from "@/logic/auth";
 
 export default {
+    
     name: 'Registro',
     data() {
         return {
             usuario: '',
             email: '',
             pass1: '',
-            pass2: ''
+            pass2: '',
+            error: false
         }
     },
 
-    methods: {
-        ...mapActions(['nuevoUsuarioAction']),
-        SignIn() {
-            if(this.pass1 === this.pass2){
-                this.nuevoUsuarioAction({
-                    email: this.email,
-                    password: this.pass2,
-                })
-            } else {
-                return alert('Repita la misma contraseña')
-            }
-        }
-    },
+    
+};
 
-    computed: {
-        ...mapState(['error'])
-    }
-}
+
 </script>
 
 <style scoped>
