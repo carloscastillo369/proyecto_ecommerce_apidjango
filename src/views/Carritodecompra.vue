@@ -412,7 +412,7 @@ export default {
 
 
 
-<style  scope >
+<style scope>
 
 body{font-family: 'Poppins', sans-serif;}
 
@@ -710,20 +710,22 @@ list-style: none;
   .Cajon-Carrito{
 
       position: relative;
+  }
   
   .Text-costo{
 
      padding: 5px;
       
 }
-
-  
-  
-
-  
 }
 
-}
+  
+  
+
+  
+
+
+
 
 
 @media (max-width: 375px) { 
@@ -746,8 +748,9 @@ list-style: none;
   padding:20px;
  
 
-}
 
+
+}
 .Text-costo{
 
      padding: 0px;
@@ -815,7 +818,7 @@ padding-left: 0px;
 }
 /*OCULTA TODO LOS FORMULARIOS TERMINA RESPONSIVE*/
 
- 
  }
+ 
 
 </style>
