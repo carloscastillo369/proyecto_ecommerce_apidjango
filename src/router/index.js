@@ -30,6 +30,11 @@ const routes = [
     name: 'MisCompras',
     component: () => import('../views/MisCompras.vue'),
     meta: {requiresAuth: true}
+  },
+  {
+    path: '/Carritodecompra',
+    name: 'Carritodecompra',
+    component: () => import('../views/Carritodecompra.vue')
   }
 ]
 
