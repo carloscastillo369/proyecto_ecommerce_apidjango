@@ -21,14 +21,6 @@ export default {
     components: {
         BannerLogin,
         Registro
-    },
-    created() {
-        document.getElementById("header").classList.toggle("d-none");
-        document.getElementById("footer").classList.toggle("d-none");
-    },
-    destroyed() {
-        document.getElementById("header").classList.toggle("d-none");
-        document.getElementById("footer").classList.toggle("d-none");
     }
 }
 </script>
