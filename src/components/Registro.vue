@@ -108,7 +108,23 @@ export default {
       }
     }
     },
+    
+    ...mapActions(['nuevoUsuarioAction']),
+        register() {
+            if(this.password === this.pass2){
+                this.nuevoUsuarioAction({
+                    first_name: this.first_name,
+                    email: this.email,
+                    password: this.pass2,
+                })
+            } else {
+                return alert('Repita la misma contraseña')
+            }
+        },
 
+     computed: {
+        ...mapState(['error'])
+    }
     
 };
 
