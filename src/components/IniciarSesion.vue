@@ -7,8 +7,8 @@
                 <div>
                     <input 
                         class="col-sm-4-body-input-1" 
-                        type="text" 
-                        placeholder="Usuario" 
+                        type="email" 
+                        placeholder="Correo electrónico" 
                         v-model="username"
                         required
                     >
