@@ -2,10 +2,11 @@
     <!--CAMBIO DE EMAIL POR USERNAME EN V-MODEL Y PREVENT LOGIN-->
     <div>
         <div class="col-sm-4-body">
-            <p class="text">Si aún no te has registrado, ve a la pestaña <span>Registrarse</span> </p>
+           
+            <router-link to="/register"><p class="text">Si aún no tienes cuenta, ve a la pestaña <span>Registrarse.</span></p></router-link>
             <form @submit.prevent="login">
                 <div>
-                    <input 
+                <input 
                         class="col-sm-4-body-input-1" 
                         type="email" 
                         placeholder="Correo electrónico" 
@@ -41,8 +42,12 @@
                     <a>¿Olvidaste tu contraseña?</a>
                 </div>
            
+        
 
             <a href="/" class="salir">Salir del registro</a>
+
+            
+
         </div>
     </div>        
 </template>
@@ -51,13 +56,14 @@
 //import firebase from 'firebase/app'
 import { mapActions, mapState } from "vuex"
 
+
 /***** CÓDIGO CON AXIOS *****/
 
 import auth from "@/logic/auth";
 
 export default {
     name: 'IniciarSesion',
-        data: () => ({
+    data: () => ({
                 username: "",
                 password: "",
                 error: false
@@ -67,12 +73,14 @@ export default {
     async login() {
       try {
         await auth.login(this.username, this.password);
-        this.$router.push("../views/MisCompras.vue");
+        this.$router.push("/miscompras");
       } catch (error) {
         this.error = true;
       }
     }
   },
+
+  
 }
 
 
@@ -83,6 +91,14 @@ export default {
     .text {
         font-size: 12px;
         margin-bottom: 60px;
+        color: #8B9099;
+        text-decoration: none;
+        
+    }
+
+    .error {
+        color: #8B9099;
+        font-size: 12px;
     }
 
     span {
@@ -126,7 +142,7 @@ export default {
         font-size: 12px;
         padding-top: 20px;
         font-weight: bold;
-        color: #5640FF;
+        color: #2c16d8;
         text-decoration: underline;
         margin: 10px 0px 0px 0px;
         cursor: pointer;
@@ -135,12 +151,13 @@ export default {
     .salir {
         border: unset;
         border-radius: 5px;
-        background: #308aad;
+        background: #5640FF;
         padding: 5px 10px;
         margin-top: 80px;
         margin-left: 200px;
         color: #FFFFFF;
         text-decoration: none;
+        font-size: 12px;
     }
 
     @media screen and (min-device-width:1366px){
