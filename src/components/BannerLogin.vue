@@ -1,11 +1,11 @@
 <template>
     <div class="col-sm-8 sm-8">
         <router-link to="/">
-            <div><img class="col-sm-8-img-1" align="left" src="@/assets/logo.png"></div>
+            
         </router-link>
         <div><h2 class="col-sm-8-tittle">¡Explota todo tu potencial <br> tecnológico!</h2></div>
         <div><p class="col-sm-8-text">Con nuestros programas <br> de especialización</p></div>
-        <div class="col-sm-8-img-2"><img src="@/assets/respaldo-light.png"></div>
+        
     </div>
 </template>
 

@@ -54,6 +54,7 @@ import ItemCompra from "@/components/ItemCompra.vue"
 import CardCupon from "@/components/CardCupon.vue"
 import { mapActions, mapState } from "vuex"
 
+
 export default {
     name: 'MisCompras',
     components: {
