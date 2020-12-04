@@ -32,9 +32,9 @@ const routes = [
     meta: {requiresAuth: true}
   },
   {
-    path: '/Carritodecompra',
-    name: 'Carritodecompra',
-    component: () => import('../views/Carritodecompra.vue')
+    path: '/pasareladepagos',
+    name: 'Pasarela',
+    component: () => import('../views/Pasarela.vue')
   }
 ]
 

@@ -7,7 +7,9 @@
         <div class="input-cupon">
             <input type="text" placeholder="Agregar un código de descuento">
         </div>
-        <button>Continuar</button>
+        <router-link class="button" to="/pasareladepagos">
+            Continuar
+        </router-link>
     </div>
 </template>
 
@@ -60,7 +62,8 @@ export default {
         font-size: 12px;
     }
 
-    button {
+    .button {
+        width: 100%;
         display: block;
         height: 50px;
         border: unset;
@@ -68,6 +71,12 @@ export default {
         background: var(--button1);
         color: var(--colorText1);
         outline: unset;
+        text-align: center;
+        padding-top: 14px;
+    }
+
+    a {
+        text-decoration: none;
     }
 
     @media screen and (min-device-width:780px){
