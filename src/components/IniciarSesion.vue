@@ -24,10 +24,6 @@
                         required
                     >
                 </div>
-
-                <div> <!--CAMBIO DE TEXTO ERROR-->
-                    <p v-if="error" class="error">Ingresaste mal algún dato.</p>
-                </div>
                 
                 <div>
                     <button 
@@ -76,6 +72,7 @@ export default {
         this.$router.push("/miscompras");
       } catch (error) {
         this.error = true;
+        return alert('Ingrese datos válidos')
       }
     }
   },
@@ -97,7 +94,7 @@ export default {
     }
 
     .error {
-        color: #8B9099;
+        color: red;
         font-size: 12px;
     }
 

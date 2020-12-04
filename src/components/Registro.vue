@@ -106,9 +106,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
     },
-    
+
     ...mapActions(['nuevoUsuarioAction']),
         register() {
             if(this.password === this.pass2){
@@ -121,6 +120,10 @@ export default {
                 return alert('Repita la misma contraseña')
             }
         },
+
+    },
+    
+    
 
      computed: {
         ...mapState(['error'])
