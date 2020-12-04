@@ -6,7 +6,6 @@
         </div>
         <div class="input-cupon">
             <input type="text" placeholder="Agregar un código de descuento">
-            
         </div>
         <button>Continuar</button>
     </div>
