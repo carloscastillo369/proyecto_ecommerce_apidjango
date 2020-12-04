@@ -15,6 +15,7 @@ export default new Vuex.Store({
   state: {
     cursos: [],
     carrito: [],
+    sumaTotal: 0,
     curso: {},
     usuario: null,
     error: null,
@@ -34,16 +35,19 @@ export default new Vuex.Store({
     addCarritoMutation(state, payload) {
       const filtrar = state.carrito.filter(curso => curso.id === payload.id)
       if(filtrar.length === 0) {
+        state.sumaTotal += Number(payload.precio)
         state.carrito.push(payload);
       }
     },
 
     deleteCursoCarritoMutation(state, payload){
       state.carrito = state.carrito.filter(item => item.id !== payload.id)
+      state.sumaTotal -= Number(payload.precio);
     },
 
     vaciarCarritoMutation(state){
       state.carrito = []
+      state.sumaTotal = 0
     },
 
     nuevoUsuarioMutation(state, payload){

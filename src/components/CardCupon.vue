@@ -1,8 +1,8 @@
 <template>
-    <div class="card-cupon">
+    <div :class="[ carrito.length === 0 ? 'd-none' : 'card-cupon']">
         <div class="datos-curso">
             <h2>Subtotal</h2>
-            <h2>S/ 1000</h2>
+            <h2>S/ {{sumaTotal}}</h2>
         </div>
         <div class="input-cupon">
             <input type="text" placeholder="Agregar un código de descuento">
@@ -12,8 +12,13 @@
 </template>
 
 <script>
+import { mapState } from "vuex"
+
 export default {
-    name: 'CardCupon'
+    name: 'CardCupon',
+    computed: {
+        ...mapState(['carrito','sumaTotal'])
+    },
 }
 </script>
 
@@ -22,6 +27,7 @@ export default {
         width: 330px;
         height: 283px;
         padding: 20px;
+        margin: 0 auto;
         background: var(--bgbeneficio);
         display: flex;
         flex-direction: column;
@@ -46,11 +52,12 @@ export default {
         border: unset;
         border: 1px solid var(--colorText3);
         border-radius: 5px;
+        outline: unset;
+        padding-left: 10px;
     }
 
     input::placeholder {
         font-size: 12px;
-        padding-left: 20px;
     }
 
     button {
@@ -60,5 +67,12 @@ export default {
         border-radius: 10px;
         background: var(--button1);
         color: var(--colorText1);
+        outline: unset;
+    }
+
+    @media screen and (min-device-width:780px){
+        .card-cupon {
+            margin: 0;
+        }
     }
 </style>

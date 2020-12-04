@@ -1,5 +1,6 @@
 <template>
     <div class="curso">
+        <Header/>
         <Banner :bgcurso="curso"/>
         <div class="section">
             <div class="contain"> 
@@ -81,7 +82,7 @@
                             </b-collapse>
                         </b-card>
 
-                        <b-card id="formulario" no-body class="mb-1">
+                        <b-card no-body class="mb-1">
                             <b-card-header header-tag="header" class="p-1" role="tab">
                                 <b-button block v-b-toggle.accordion-3 variant="info">Horarios</b-button>
                             </b-card-header>
@@ -100,23 +101,28 @@
             </div>
             <FormPostula widthCurso="width-60"/>            
         </div>
+        <Footer/>
     </div>
 </template>
 
 <script>
+import Header from "@/components/Header.vue"
 import Banner from "@/components/Banner.vue"
 import FormPostula from "@/components/FormPostula.vue"
 import Horario from "@/components/Horario.vue"
 import MallaCurricular from "@/components/MallaCurricular.vue"
+import Footer from "@/components/Footer.vue"
 import { mapActions, mapState } from "vuex";
 
 export default {
     name:'Curso',
     components: {
+        Header,
         Banner,
         FormPostula,
         Horario,
-        MallaCurricular
+        MallaCurricular,
+        Footer
     },
     data() {
         return {

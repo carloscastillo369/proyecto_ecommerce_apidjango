@@ -25,7 +25,7 @@
                 
         <div  class="card">
             <img src="@/assets/bene3.png" alt="">
-            <div id="formulario">
+            <div>
                 <h4>Empleabilidad</h4>
                 <p>Al finalizar el programa y certificarte a nombre de IDAT, podrás acceder a ofertas 
                 laborales especialmente identificadas para la comunidad PachaQTec, a través de 

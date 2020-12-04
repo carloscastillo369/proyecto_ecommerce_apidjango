@@ -5,7 +5,7 @@
             <div class="contain">
                 <h1>!Explota todo tu potencial <br> tecnológico!</h1>
                 <p>Con nuestro programas de especialización</p>
-                <a href="#formulario"><b-icon icon="pencil"></b-icon><span>Inscríbite</span></a>
+                <a class="lapiz-inscribete" href="#formulario"><b-icon icon="pencil"></b-icon><span>Inscríbite</span></a>
             </div>
         </div>
 
@@ -14,7 +14,7 @@
             <div class="bgcursos">
                 <div class="texto">
                     <h1 class="nombre-curso">{{bgcurso.nombre_programa}}</h1>
-                    <a href="#formulario"><b-icon icon="pencil"></b-icon><span>Inscríbite</span></a>
+                    <a class="lapiz-inscribete" href="#formulario"><b-icon icon="pencil"></b-icon><span>Inscríbite</span></a>
                 </div>
             </div>
         </div>
@@ -22,8 +22,12 @@
 </template>
 
 <script>
+import BotonWhatsApp from "@/components/BotonWhatsApp.vue"
 export default {
     name: 'Banner',
+    components: {
+        BotonWhatsApp
+    },
     props: {
         bgcurso: {}
     }
@@ -80,7 +84,7 @@ export default {
         font-size: 16px;
     }
 
-    a {
+    .lapiz-inscribete {
         text-decoration: none;
         color: var(--colorText1);
         width: 130px;
@@ -93,7 +97,6 @@ export default {
         position: fixed;
         top: 230px;
         right: 2.5%;
-        z-index: 100;
     }
 
     span {
@@ -115,7 +118,7 @@ export default {
             padding-left: 50px;
         }
 
-        a {
+        .lapiz-inscribete {
             right: 3%;
             left: 83%;
         }
@@ -151,7 +154,7 @@ export default {
             font-size: 20px;
         }
 
-        a {
+        .lapiz-inscribete {
             display: none;
         }
     }
