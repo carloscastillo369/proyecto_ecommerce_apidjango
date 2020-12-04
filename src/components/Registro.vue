@@ -1,4 +1,5 @@
 <template>
+    <!--CAMBIO V-MODEL USUARIO POR FIRST_NAME Y PREVENT REGISTER-->
     <div>
         <div class="col-sm-4-body">
             <p class="text">Si ya tienes una cuenta ve a la pestaña <span>Iniciar Sesion</span> </p>
@@ -8,7 +9,8 @@
                         class="col-sm-4-body-input-1" 
                         type="text" 
                         placeholder="Nombres y apellidos"
-                        v-model="usuario"
+                        v-model="first_name"
+                        required
                     >
                 </div>
 
@@ -18,6 +20,7 @@
                         type="email" 
                         placeholder="Correo electrónico"
                         v-model="email" 
+                        required
                     >
                 </div>
 
@@ -26,7 +29,8 @@
                         class="col-sm-4-body-input-3 input-password" 
                         type="password" 
                         placeholder="Contraseña"
-                        v-model="pass1" 
+                        v-model="password" 
+                        required
                     >
                 </div>
 
@@ -36,22 +40,26 @@
                         type="password" 
                         placeholder="Repite contraseña"
                         v-model="pass2"
+                        required
                     >
                 </div>
-                <div>
-                    <label class="form-label" for="#password-repeat">Repite la contraseña:</label>
-                </div>
-           
+                           
                 <div>
                     <input 
-                        class="col-sm-4-body-input-5" 
+                        class="col-sm-4-body-input-5"
+                        required 
                         type="checkbox"> Aceptar Terminos y condiciones
+                </div>
+
+                <div> <!--CAMBIO DE TEXTO ERROR-->
+                    <p v-if="error" class="error">Las contraseñas no coinciden.</p>
                 </div>
 
                 <div>
                     <button 
-                        class="btn-login" 
+                        class="btn-login"
                         type="submit">Registrarse
+                        
                     </button>
                 </div>
             </form>
@@ -63,22 +71,33 @@
 
 <script>
 import { mapActions, mapState } from "vuex"
+
+/**** CÓDIGO CON AXIOS ****/
+
 import auth from "@/logic/auth";
 
 export default {
     
     name: 'Registro',
-    data() {
-        return {
-            usuario: '',
-            email: '',
-            pass1: '',
-            pass2: '',
-            error: false
-        }
-    },
+    data: () => ({
+        first_name: "",
+        email: "",
+        password: "",
+        pass2: "",
+        error: false
+  }),
 
-    
+    methods: {
+    async register() {
+      try {
+        await auth.register(this.first_name, this.email, this.password);
+        this.$router.push("../views/MisCompras.vue")
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    } 
+ 
 };
 
 
