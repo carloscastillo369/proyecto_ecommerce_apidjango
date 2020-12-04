@@ -22,7 +22,7 @@ export default {
         BannerLogin,
         IniciarSesion
     },
-    mounted() {
+    created() {
         document.getElementById("header").classList.toggle("d-none");
         document.getElementById("footer").classList.toggle("d-none");
     },

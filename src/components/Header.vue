@@ -119,7 +119,7 @@ export default {
         },
 
         scroll() {
-            if (window.scrollY > 80) {
+            if (window.scrollY > 60) {
                 this.background = 'darkblue'
             } else {
                 this.background = 'transparente'
