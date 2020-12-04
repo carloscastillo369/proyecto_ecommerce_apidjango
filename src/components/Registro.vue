@@ -2,7 +2,7 @@
     <!--CAMBIO V-MODEL USUARIO POR FIRST_NAME Y PREVENT REGISTER-->
     <div>
         <div class="col-sm-4-body">
-            <p class="text">Si ya tienes una cuenta ve a la pestaña <span>Iniciar Sesion</span> </p>
+           <router-link to="/login"><p class="text">Si ya tienes una cuenta, ve a la pestaña <span>Iniciar sesión.</span></p></router-link> 
             <form @submit.prevent="register">
                 <div>
                     <input 
@@ -48,7 +48,14 @@
                     <input 
                         class="col-sm-4-body-input-5"
                         required 
-                        type="checkbox"> Aceptar Terminos y condiciones
+                        type="checkbox"> 
+                        <span v-b-modal.modal-1 class="spantext"> Aceptar términos y condiciones.</span> 
+                        <b-modal id="modal-1" title="Términos y condiciones">
+                        <p class="my-4" >Los términos y condiciones de uso describen todos los términos y condiciones de carácter general que resultan aplicables al uso de aquellos contenidos o servicios disponibles bajo el dominio y subdominios de www.idat.edu.pe.
+Cuando el usuario accede a esta página web o cuando consulta la información que se encuentra contenida en ella, reconoce no solo que ha leído, sino que también ha entendido y aceptado, los términos y condiciones generales que se desarrollan.
+En caso de no aceptarlos, se le solicita que no haga uso, ni acceda, ni manipule la información de los servicios ofrecidos por el sitio web, ya que en condición de usuario estaría haciendo un uso inadecuado de este.</p>
+                        </b-modal>
+
                 </div>
 
                 <div> <!--CAMBIO DE TEXTO ERROR-->
@@ -66,7 +73,9 @@
 
             <a href="/" class="salir">Salir del registro</a>
         </div>
-    </div>        
+    </div>  
+
+          
 </template>
 
 <script>
@@ -91,13 +100,33 @@ export default {
     async register() {
       try {
         await auth.register(this.first_name, this.email, this.password);
-        this.$router.push("../views/MisCompras.vue")
+        this.$router.push("/login")
       } catch (error) {
         console.log(error);
       }
+    },
+
+    ...mapActions(['nuevoUsuarioAction']),
+        register() {
+            if(this.password === this.pass2){
+                this.nuevoUsuarioAction({
+                    first_name: this.first_name,
+                    email: this.email,
+                    password: this.pass2,
+                })
+            } else {
+                return alert('Repita la misma contraseña')
+            }
+        },
+
+    },
+    
+    
+
+     computed: {
+        ...mapState(['error'])
     }
-    } 
- 
+    
 };
 
 
@@ -115,6 +144,8 @@ export default {
     .text {
         font-size: 14px;
         margin-bottom: 60px;
+        color: #8B9099;
+        text-decoration: none;
     }
 
     span {
@@ -167,13 +198,28 @@ export default {
     .salir {
         border: unset;
         border-radius: 5px;
-        background: #308aad;
+        background: #5640FF;
         padding: 5px 10px;
-        margin-top: 40px;
-        margin-left: 170px;
+        margin-top: 80px;
+        margin-left: 200px;
         color: #FFFFFF;
         text-decoration: none;
+        font-size: 12px;
     }
+
+    .spantext {
+        color: #8B9099;
+        font-weight: lighter;
+        font-size: 12px;
+    }
+    
+    .spantext:hover {
+        font-weight: bold;
+        cursor: pointer;
+        
+    }
+
+    
 
     @media screen and (min-device-width:1366px){
         .col-sm-4-header {

@@ -3,7 +3,7 @@
         <BannerLogin/>
         <div class="col-sm-4 sm-4">
             <b-nav tabs fill class="m-auto">
-                    <b-nav-item to="/login" exact-active-class="active">Iniciar Sesión</b-nav-item>
+                    <b-nav-item to="/login" exact-active-class="active">Iniciar sesión</b-nav-item>
                     <b-nav-item to="/register" active-class="active">Registrarse</b-nav-item>
             </b-nav>   
             <IniciarSesion/> 

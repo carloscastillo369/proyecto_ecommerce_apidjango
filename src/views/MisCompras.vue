@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <div :class="[ carrito.length === 0 ? 'heightVW' : 'miscompras' ]">
         <Header/>
         <div class="bgdarkblue"></div>
@@ -45,6 +46,14 @@
                 <CardCupon/>
             </div>
         </div>
+=======
+    <div>
+        <Header bgblue="bgblue"/>
+        <p style="padding-top:200px;"></p>
+
+        
+ 
+>>>>>>> 988fff368c1cd09297d6834740844a9b8ec9fbdd
     </div>
 </template>
 
@@ -53,6 +62,7 @@ import Header from "@/components/Header.vue"
 import ItemCompra from "@/components/ItemCompra.vue"
 import CardCupon from "@/components/CardCupon.vue"
 import { mapActions, mapState } from "vuex"
+
 
 export default {
     name: 'MisCompras',
