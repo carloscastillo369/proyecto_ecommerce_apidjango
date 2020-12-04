@@ -1,24 +1,13 @@
 <template>
   <div id="app">
-    <Header/>
     <div class="body">
       <router-view/>
     </div>
-    <Footer/>
   </div>
 </template>
 
 <script>
-import Header from "@/components/Header.vue"
-import BotonWhatsApp from "@/components/BotonWhatsApp.vue"
-import Footer from "@/components/Footer.vue"
-
 export default {
-    components: {
-        Header,
-        BotonWhatsApp,
-        Footer
-    }
 }
 </script>
 

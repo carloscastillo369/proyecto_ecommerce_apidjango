@@ -2,7 +2,7 @@
     <div id="header" :class="['header', background]">
         <div class="contain">
             <router-link to="/">
-                <img style="height:25px;" src="@/assets/logo.png" alt="">
+                <img class="logo" src="@/assets/logo.png" alt="">
             </router-link>
 
             <div
@@ -119,7 +119,7 @@ export default {
         },
 
         scroll() {
-            if (window.scrollY > 60) {
+            if (window.scrollY > 10) {
                 this.background = 'darkblue'
             } else {
                 this.background = 'transparente'
@@ -149,6 +149,10 @@ export default {
         justify-content: space-between;
         align-items: center;
         padding: 0 2.5%;
+    }
+
+    .logo {
+        height:25px;
     }
 
     .cart {
@@ -238,6 +242,10 @@ export default {
             height: 80px;
         }
 
+        .logo {
+            height:30px;
+        }
+
         .menu-sm {
             display: none;
         }
@@ -281,6 +289,10 @@ export default {
     }
 
     @media screen and (min-device-width:1200px){
+        .logo {
+            height:35px;
+        }
+
         .cart:hover #menu-carrito {
             display: block;
         }

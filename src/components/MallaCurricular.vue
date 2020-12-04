@@ -39,16 +39,38 @@ export default {
 </script>
 
 <style scoped>
+  .accordion {
+      width: 100%;
+      padding: 0 10px;
+    }
+
+  h3 {
+      font-size: 20px;
+  }
+
+  p {
+      font-size: 14px;
+  }
+
+  @media screen and (min-device-width:780px){
     .accordion {
-        padding-left: 12%;
-        padding-bottom: 40px;
+      padding: 0 7%;
     }
+  }
 
-    h3 {
-        font-size: 20px;
-    }
 
-    p {
-        font-size: 14px;
+  @media screen and (min-device-width:950px){
+    .accordion {
+      width: 85%;
     }
+  } 
+
+  @media screen and (min-device-width:1200px){
+    .accordion {
+      width: 100%;
+      padding-right: 0;
+      padding-left: 12%;
+      padding-bottom: 40px;
+    }
+  }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div :class="['formulario', widthHome, widthCurso]">
+    <div id="formulario" :class="['formulario', widthHome, widthCurso]">
         <div class="contain">
             <img src="@/assets/mobile-form.png" alt="">
             <h3>Postula y obtén un 10% de descuento en el programa</h3>
@@ -48,16 +48,22 @@
 
                 <b-button type="submit">Quiero Postular</b-button>
             </form>
+            <BotonWhatsApp/>
         </div>
     </div>
 </template>
 
 <script>
+import BotonWhatsApp from "@/components/BotonWhatsApp.vue"
+
 export default {
     name: 'FormPostula',
     props: {
         widthHome: '',
         widthCurso: ''
+    },
+    components: {
+        BotonWhatsApp
     },
     data() {
         return {
@@ -156,10 +162,12 @@ export default {
         }
 
         .contain {
-            width: 370px;
+            width: 300px;
             position: sticky;
             top: 60px;
             padding: 95px 75px;
+            padding-left: 0;
+            padding-right: 75px;
             background: var(--bgbody);
         }
 
@@ -168,7 +176,7 @@ export default {
             position: absolute;
             z-index: -1;
             top: 0;
-            left: 0;
+            left: -72px;
         }
     }
 </style>
