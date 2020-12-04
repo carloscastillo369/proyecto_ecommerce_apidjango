@@ -5,23 +5,35 @@
                 <tr>
                     <th>Imagen</th>
                     <th>Nombre</th>
-                    <th>Precio</th>
+                    <th style="width:80px;">Precio</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody class="body">
-                <ItemCompra/>
+                <ItemCompra
+                    v-for="curso in carrito" :key="curso.id"
+                    :curso="curso"
+                />
             </tbody>
             <tfoot>
                 
-                <th class="text-cartvacio" scope="row" colspan="5">Carrito vacío - Empieze a comprar!</th>
-                <!-- 
-                <th scope="row" colspan="5"> 
-                    <button class="vaciar-carrito">Vaciar Carrito</button> 
+                <th v-if="carrito.length === 0" class="text-cartvacio" scope="row" colspan="5">Carrito vacío - Empieze a comprar!</th>
+                
+                <th v-else scope="row" colspan="5"> 
+                    <button 
+                        @click="vaciarCarritoAction"
+                        class="vaciar-carrito"
+                    >
+                        Vaciar Carrito
+                    </button> 
                     <router-link to="/miscompras">
-                        <button class="comprar-carrito">Ir a pagar</button>
+                        <button 
+                            class="comprar-carrito"
+                        >
+                            Ir a pagar
+                        </button>
                     </router-link> 
-                </th> -->
+                </th> 
             </tfoot>
         </table>
     </div>
@@ -29,7 +41,7 @@
 
 <script>
 import ItemCompra from "@/components/ItemCompra.vue"
-import { mapState } from "vuex"
+import { mapActions, mapState } from "vuex"
 
 export default {
     name: 'Carrito',
@@ -38,6 +50,9 @@ export default {
     },
     components: {
         ItemCompra
+    },
+    methods: {
+        ...mapActions(['vaciarCarritoAction'])
     },
     computed: {
         ...mapState(['carrito'])
@@ -52,7 +67,7 @@ export default {
         width: 340px;
         margin: 0 auto;
         position: absolute;
-        top: 51px;
+        top: 35px;
         right: -52px;
         border: 1px solid var(--colorText3);
         border-radius: 5px;
@@ -83,13 +98,16 @@ export default {
 
     .vaciar-carrito {
         background: var(--button2);
+        outline: unset;
     }   
 
     .comprar-carrito {
         background: var(--button1);
+        outline: unset;
     }   
 
     .text-cartvacio {
+        font-size: 16px;
         color: var(--colorText5);
         padding-top: 20px;
     }   
@@ -104,7 +122,7 @@ export default {
 
     @media screen and (min-device-width:780px){
         .carrito {
-            top: 55px;
+            top: 30px;
         }
     }
 </style>

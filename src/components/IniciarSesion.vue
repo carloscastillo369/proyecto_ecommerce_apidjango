@@ -28,12 +28,10 @@
                     </button>
                 </div>
              </form> 
-                <p>{{loginError}}</p>
                 <div class="col-sm-4-body-secondtext">
                     <a>¿Olvidaste tu contraseña?</a>
                 </div>
            
-
             <a href="/" class="salir">Salir del registro</a>
         </div>
     </div>        
@@ -71,7 +69,7 @@ export default {
 <style scoped>
 /*Versión celular*/
     .text {
-        font-size: 12px;
+        font-size: 14px;
         margin-bottom: 60px;
     }
 

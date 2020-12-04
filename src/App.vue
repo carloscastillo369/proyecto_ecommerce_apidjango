@@ -31,6 +31,7 @@ export default {
     --bgfooter:#000D29;
     --bgbody: #F2F3F5;
     --bgimgcursos: linear-gradient(#00042500, #000425);
+    --bgportadacursos: linear-gradient(#00042533, #000425);
     --bgcomunidad: linear-gradient(#3015FD, #5640FF);
     --bgbeneficio: #FFFFFF;
     --bghorario: #5640FF;
@@ -43,6 +44,7 @@ export default {
     --colorText2: #222222;
     --colorText3: #8B9099;
     --colorText4: #000425;
+    --colorText5: #5640FF;
 
     /*COLORES BOTONES*/
     --button1: #5640FF;

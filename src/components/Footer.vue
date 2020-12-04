@@ -1,5 +1,5 @@
 <template>
-    <div class="footer">
+    <div id="footer" class="footer">
         <div class="contain">
             <img src="@/assets/footer.png" alt="">
         </div>

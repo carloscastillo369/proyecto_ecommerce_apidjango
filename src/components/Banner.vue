@@ -10,7 +10,7 @@
         </div>
 
         <div v-else class="banner">    
-            <img class="banner-img" :src="bgcurso.portada" alt="">
+            <img class="banner-img" src="./../../public/img/curso-frontend.jpg" alt="">
             <div class="bgcursos">
                 <div class="texto">
                     <h1 class="nombre-curso">{{bgcurso.nombre_programa}}</h1>
@@ -64,7 +64,7 @@ export default {
         position: absolute;
         color: var(--colorText1);
         z-index: 10;
-        background: var(--bgimgcursos);
+        background: var(--bgportadacursos);
         display: flex;
         align-items: flex-end;
         padding-left: 2.5%;

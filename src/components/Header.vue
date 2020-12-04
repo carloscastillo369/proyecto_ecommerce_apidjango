@@ -1,17 +1,16 @@
 <template>
-    <div :class="['header', background]">
+    <div id="header" :class="['header', background]">
         <div class="contain">
             <router-link to="/">
                 <img style="height:25px;" src="@/assets/logo.png" alt="">
             </router-link>
 
             <div
-                style="cursor: pointer;"
                 class="cart" 
                 @click="desplagarCarrito"
             >
-                <b-icon icon="cart3"></b-icon><span>5</span>
-                <Carrito :clase="carritoDesplegado"/>
+                <b-icon style="cursor: pointer;" icon="cart3"></b-icon><span>{{carrito.length}}</span>
+                <Carrito id="menu-carrito" :clase="carritoDesplegado"/>
             </div>
             
             <div
@@ -22,7 +21,7 @@
             </div>
             <div class="menu-md">
                 <p
-                    style="cursor: pointer;"
+                    class="curso"
                     @click="desplegarCursosmd"
                 >
                     CURSOS
@@ -47,10 +46,10 @@
             </div>
             
             <router-link to="/login">
-                <p>INICIAR SESION</p>
+                <p class="menu-title">INICIAR SESION</p>
             </router-link>
             <router-link to="/register">
-                <p>REGISTRARSE</p>
+                <p class="menu-title">REGISTRARSE</p>
             </router-link>
         </div>
         <MenuCursos :class="cursoDesplegadomd"/>
@@ -60,6 +59,7 @@
 <script>
 import Carrito  from "@/components/Carrito.vue"
 import MenuCursos from "@/components/MenuCursos.vue"
+import { mapState } from "vuex"
 
 export default {
     name: 'NavBar',
@@ -75,6 +75,9 @@ export default {
             cursoDesplegadomd: 'desactive',
             background:'transparente'
         }
+    },
+    computed: {
+        ...mapState(['carrito'])
     },
     methods: {
         desplegarMenu(){
@@ -172,6 +175,7 @@ export default {
       height: 20px;
       font-size: 11px;
       font-weight: bold;
+      cursor: pointer;
     }
 
     .menu-sm {
@@ -253,6 +257,11 @@ export default {
         .cart {
             padding-left: 25%;
         }
+
+        .curso:hover {
+            cursor: pointer;
+            color: var(--colorText3);
+        }
     }
     
     @media screen and (min-device-width:950px){
@@ -272,6 +281,10 @@ export default {
     }
 
     @media screen and (min-device-width:1200px){
+        .cart:hover #menu-carrito {
+            display: block;
+        }
+
         .cart {
             padding-left: 46%;
         }

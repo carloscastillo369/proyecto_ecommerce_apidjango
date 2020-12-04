@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router'
 import { db, auth } from './../firebase' 
+import Swal from 'sweetalert2'
+import createPersistedState from "vuex-persistedstate";
 
 let urlProgramas = 'https://cors-anywhere.herokuapp.com/https://pure-caverns-90685.herokuapp.com/api/programas'
 let urlPostulantes = 'https://cors-anywhere.herokuapp.com/https://pure-caverns-90685.herokuapp.com/api/postulantes'
@@ -13,12 +15,7 @@ export default new Vuex.Store({
   state: {
     cursos: [],
     carrito: [],
-    curso: {
-      nombre:'',
-      descripcion:'',
-      precio:null,
-      imagen:''
-    },
+    curso: {},
     usuario: null,
     error: null,
     loginUser: null,
@@ -35,8 +32,18 @@ export default new Vuex.Store({
     },
 
     addCarritoMutation(state, payload) {
-      state.carrito.push(payload)
-      console.log(state.carrito)
+      const filtrar = state.carrito.filter(curso => curso.id === payload.id)
+      if(filtrar.length === 0) {
+        state.carrito.push(payload);
+      }
+    },
+
+    deleteCursoCarritoMutation(state, payload){
+      state.carrito = state.carrito.filter(item => item.id !== payload.id)
+    },
+
+    vaciarCarritoMutation(state){
+      state.carrito = []
     },
 
     nuevoUsuarioMutation(state, payload){
@@ -88,6 +95,52 @@ export default new Vuex.Store({
       commit('addCarritoMutation', curso)
     },
 
+    /*BORRAR UN CURSO DEL CARRITO */
+    deleteCursoCarritoAction({commit}, curso) {
+      Swal.fire({
+        title: '¿Estas seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminalo!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          commit('deleteCursoCarritoMutation', curso)
+          Swal.fire(
+            'Eliminado!',
+            'El curso ha sido eliminado del carrito.',
+            'success'
+          )
+        }
+      })
+
+    },
+
+    /*VACIAR EL CARRITO */
+    vaciarCarritoAction({commit}){
+      Swal.fire({
+        title: '¿Estas seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, vaciar el carrito!',
+        cancelButtonText: 'No, cancelar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          commit('vaciarCarritoMutation')
+          Swal.fire(
+            'Carrito vacío!',
+            '',
+            'success'
+          )
+        }
+      })
+    },
+
     /*CREAR UN NUEVO USUARIO EN FIREBASE*/
     nuevoUsuarioAction({commit}, usuario){
       auth.createUserWithEmailAndPassword(usuario.email, usuario.password)
@@ -123,5 +176,7 @@ export default new Vuex.Store({
   },
 
   modules: {
-  }
+  },
+
+  plugins: [createPersistedState()],
 })

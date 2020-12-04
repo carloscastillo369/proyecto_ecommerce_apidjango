@@ -53,8 +53,6 @@
                 </div>
             </form>
 
-            <p>{{error}}</p>
-
             <a href="/" class="salir">Salir del registro</a>
         </div>
     </div>        
@@ -104,7 +102,7 @@ export default {
     }
 
     .text {
-        font-size: 12px;
+        font-size: 14px;
         margin-bottom: 60px;
     }
 

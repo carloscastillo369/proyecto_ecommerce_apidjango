@@ -1,20 +1,29 @@
 <template>
-        <tr class="fila">
-            <td><img src="" alt=""></td>
-            <td>Front End</td>
-            <td>S/. 600</td>
+        <tr id="listadecompras" class="fila">
+            <td><img :src="curso.portada" alt=""></td>
+            <td>{{curso.nombre_programa}}</td>
+            <td>S/. {{curso.precio}}</td>
             <td>
-                <button>X</button>
+                <button
+                    class="borrar-curso" 
+                    @click="deleteCursoCarritoAction(curso)"
+                >
+                    X
+                </button>
             </td>
         </tr>
 </template>
 
 <script>
+import { mapActions } from "vuex"
 
 export default {
     name: 'ItemCompra',
     props: {
         curso: {}
+    },
+    methods: {
+        ...mapActions(['deleteCursoCarritoAction'])
     }
 }
 </script>
@@ -32,13 +41,14 @@ export default {
         border: 0;
     }
 
-    button {
+    .borrar-curso {
         width: 25px;
         height: 25px;
         border-radius: 100%;
         border: unset;
         background: var(--button3);
-        color: white;
+        color: var(--colorText1);
+        outline: none;;
     }
 
 </style>
