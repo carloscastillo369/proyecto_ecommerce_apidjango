@@ -2,7 +2,7 @@
     <!--CAMBIO V-MODEL USUARIO POR FIRST_NAME Y PREVENT REGISTER-->
     <div>
         <div class="col-sm-4-body">
-           <router-link to="/login"><p class="text">Si ya tienes una cuenta, ve a la pestaña <span>Iniciar sesión.</span></p></router-link> 
+           <p class="text">Si ya tienes una cuenta, ve a la pestaña <router-link class="link" to="/login"><span>Iniciar sesión.</span></router-link></p>
             <form @submit.prevent="register">
                 <div>
                     <input 
@@ -200,11 +200,12 @@ export default {
         border-radius: 5px;
         background: #5640FF;
         padding: 5px 10px;
-        margin-top: 80px;
+        margin-top: 40px;
         margin-left: 200px;
         color: #FFFFFF;
         text-decoration: none;
         font-size: 12px;
+        
     }
 
     .spantext {
@@ -219,7 +220,9 @@ export default {
         
     }
 
-    
+    .link {
+        text-decoration: none;
+    }
 
     @media screen and (min-device-width:1366px){
         .col-sm-4-header {

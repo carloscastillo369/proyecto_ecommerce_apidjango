@@ -3,7 +3,7 @@
     <div>
         <div class="col-sm-4-body">
            
-            <router-link to="/register"><p class="text">Si aún no tienes cuenta, ve a la pestaña <span>Registrarse.</span></p></router-link>
+            <p class="text">Si aún no tienes cuenta, ve a la pestaña <router-link class="link" to="/register"><span>Registrarse.</span></router-link></p>
             <form @submit.prevent="login">
                 <div>
                 <input 
@@ -152,6 +152,10 @@ export default {
         color: #FFFFFF;
         text-decoration: none;
         font-size: 12px;
+    }
+
+    .link {
+        text-decoration: none;
     }
 
     @media screen and (min-device-width:1366px){
