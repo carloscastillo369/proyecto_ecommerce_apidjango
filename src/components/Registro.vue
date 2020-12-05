@@ -24,20 +24,22 @@
                     >
                 </div>
 
-                <div>
+                <div class="input-constraseña">
+                    <img @click="mostrarPassword" class="img-eye" :src="`/img/${eye}.png`" alt="">
                     <input 
                         class="col-sm-4-body-input-3 input-password" 
-                        type="password" 
+                        :type="tipoInput" 
                         placeholder="Contraseña"
                         v-model="password" 
                         required
                     >
                 </div>
 
-                <div>
+                <div class="input-constraseña">
+                    <img @click="mostrarRPassword" class="img-eye" :src="`/img/${eyeR}.png`" alt="">
                     <input 
                         class="col-sm-4-body-input-4 input-password" 
-                        type="password" 
+                        :type="tipoInputR" 
                         placeholder="Repite contraseña"
                         v-model="pass2"
                         required
@@ -84,6 +86,7 @@ import { mapActions, mapState } from "vuex"
 /**** CÓDIGO CON AXIOS ****/
 
 import auth from "@/logic/auth";
+import Swal from 'sweetalert2'
 
 export default {
     
@@ -93,41 +96,55 @@ export default {
         email: "",
         password: "",
         pass2: "",
-        error: false
+        error: false,
+        eye: 'eye-close.3254d7e6',
+        eyeR: 'eye-close.3254d7e6',
+        tipoInput: 'password',
+        tipoInputR: 'password'
   }),
 
     methods: {
-    async register() {
-      try {
-        await auth.register(this.first_name, this.email, this.password);
-        this.$router.push("/login")
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    ...mapActions(['nuevoUsuarioAction']),
-        register() {
+        async register() {
             if(this.password === this.pass2){
-                this.nuevoUsuarioAction({
-                    first_name: this.first_name,
-                    email: this.email,
-                    password: this.pass2,
-                })
+                try {
+                    await auth.register(this.first_name, this.email, this.password);
+                    Swal.fire({
+                      icon: 'success',
+                      title: 'Usuario registrado correctamente',
+                      showConfirmButton: false,
+                      timer: 3000
+                    })
+                    this.$router.push("/login")
+                } catch (error) {
+                console.log(error);
+                }
             } else {
-                return alert('Repita la misma contraseña')
+                Swal.fire('Las contraseñas no coinciden')
+            }
+        }, 
+
+        mostrarPassword(){
+            if(this.eye == 'eye-close.3254d7e6'){
+                this.eye = 'eye-open.362298e0'
+                this.tipoInput = 'text'
+            } else {
+                this.eye = 'eye-close.3254d7e6'
+                this.tipoInput = 'password'
             }
         },
 
+        mostrarRPassword(){
+            if(this.eyeR == 'eye-close.3254d7e6'){
+                this.eyeR = 'eye-open.362298e0'
+                this.tipoInputR = 'text'
+            } else {
+                this.eyeR = 'eye-close.3254d7e6'
+                this.tipoInputR = 'password'
+            }            
+        },
     },
     
-    
-
-     computed: {
-        ...mapState(['error'])
-    }
-    
-};
+}
 
 
 </script>
@@ -193,6 +210,7 @@ export default {
         font-size: 14px;
         font-weight: bold;
         margin: 60px 0px 0px 0px;
+        outline: unset;
     }
 
     .salir {
@@ -222,6 +240,19 @@ export default {
 
     .link {
         text-decoration: none;
+    }
+
+    .input-constraseña {
+        position: relative;
+    }
+    
+    .img-eye {
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        right: 20px;
+        top: 12px;
+        cursor: pointer;
     }
 
     @media screen and (min-device-width:1366px){

@@ -3,48 +3,47 @@
         <div class="contain">
             <img src="@/assets/mobile-form.png" alt="">
             <h3>Postula y obtén un 10% de descuento en el programa</h3>
-            <form>
+            <form @submit.prevent="formPostulante">
                 <b-form-input 
                     id="input-1"
-                    v-model="form.nombre"
+                    v-model="nombre_postulante"
                     type="text" 
                     placeholder="NOMBRE"
+                    required
 
                 >
                 </b-form-input>
 
                 <b-form-input 
                     id="input-2"
-                    v-model="form.telefono"
+                    v-model="celular"
                     type="number" 
                     placeholder="TELEFONO / CELULAR"
+                    required
                 >
                 </b-form-input>
 
                 <b-form-input 
                     id="input-3"
-                    v-model="form.email"
+                    v-model="correo"
                     type="email" 
                     placeholder="CORREO ELECTRÓNICO"
+                    required
                 >
                 </b-form-input>
 
                 <b-form-select
                     id="input-4"
-                    v-model="form.programa"
+                    v-model="programa"
                     :options="programas"
+                    required
                 >
                 </b-form-select>
 
-                <b-form-checkbox
-                    id="checkbox-1"
-                    name="checkbox-1"
-                    value="accepted"
-                    unchecked-value="not_accepted"
-                >
-                <p>Acepto las <a href="">Políticas de privacidad</a> </p> 
-                <p>{{form.nombre}} {{form.telefono}} {{form.email}} {{form.programa}}</p>
-                </b-form-checkbox>
+                <div class="input-checkbox">
+                    <input class="checkbox" type="checkbox" :checked="checked">
+                    <p> Acepto las <a href="">Políticas de privacidad</a></p> 
+                </div>
 
                 <b-button type="submit">Quiero Postular</b-button>
             </form>
@@ -55,6 +54,9 @@
 
 <script>
 import BotonWhatsApp from "@/components/BotonWhatsApp.vue"
+import auth from "@/logic/auth";
+import Swal from 'sweetalert2'
+import { mapActions } from "vuex"
 
 export default {
     name: 'FormPostula',
@@ -67,12 +69,10 @@ export default {
     },
     data() {
         return {
-            form: {
-                nombre:'',
-                telefono:'',
-                email:'',
-                programa: null
-            },
+            nombre_postulante:'',
+            celular:'',
+            correo:'',
+            programa: null,
             programas: [
                 { text: 'PROGRAMA', value: null }, 
                 'Front-End', 
@@ -80,9 +80,57 @@ export default {
                 'Desarrollo de Aplicativos Móviles', 
                 'Diseño de Experiencia de Usuario',
                 'Desarrollo de Videojuegos'
-            ]
+            ],
+            numero: 0,
+            error: false,
+            checked: false
         }
     },
+
+    methods: {
+        ...mapActions(['formPostulaAction']),
+        async formPostulante() {
+            try {
+                await auth.formPostulante(this.nombre_postulante, this.celular, this.correo, this.numeroPrograma);
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Postulación exitosa',
+                  showConfirmButton: false,
+                  timer: 3000
+                })
+                this.nombre_postulante = ''
+                this.celular = '',
+                this.correo = '',
+                this.programa = null
+                this.checked = null
+                
+            } catch (error) {
+                console.log(error);
+            }
+        }, 
+    },
+
+    computed: {
+        numeroPrograma(){
+            if(this.programa === 'Front-End'){
+                this.numero = 1
+            }; 
+            if(this.programa === 'Back-end'){
+                this.numero = 2
+            }; 
+            if(this.programa === 'Desarrollo de Aplicativos Móviles'){
+                this.numero = 3
+            }; 
+            if(this.programa === 'Diseño de Experiencia de Usuario'){
+                this.numero = 4
+            }; 
+            if(this.programa === 'Desarrollo de Videojuegos'){
+                this.numero = 5
+            }; 
+
+            return this.numero
+        }
+    }
 }
 </script>
 
@@ -142,6 +190,17 @@ export default {
         font-size: 14px;
         font-weight: bold;
         color: var(--colorText1);
+    }
+
+    .input-checkbox {
+        display: flex;
+        align-items: center;
+        height: 40px;
+    }
+
+    .checkbox {
+        width: 14px;
+        margin-right: 8px;
     }
 
     p {

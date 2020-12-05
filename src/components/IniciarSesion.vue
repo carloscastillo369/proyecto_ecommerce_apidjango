@@ -15,10 +15,11 @@
                     >
                 </div>
                 
-                <div>
+                <div class="input-constraseña">
+                    <img @click="mostrarPassword" class="img-eye" :src="`/img/${eye}.png`" alt="">
                     <input 
                         class="col-sm-4-body-input-2" 
-                        type="password" 
+                        :type="tipoInput" 
                         placeholder="Contraseña"
                         v-model="password"
                         required
@@ -53,25 +54,39 @@ import { mapActions, mapState } from "vuex"
 /***** CÓDIGO CON AXIOS *****/
 
 import auth from "@/logic/auth";
+import Swal from 'sweetalert2'
 
 export default {
     name: 'IniciarSesion',
     data: () => ({
                 username: "",
                 password: "",
-                error: false
+                error: false,
+                eye: 'eye-close.3254d7e6',
   }),
 
     methods: {
-    async login() {
-      try {
-        await auth.login(this.username, this.password);
-        this.$router.push("/miscompras");
-      } catch (error) {
-        this.error = true;
-        return alert('Ingrese datos válidos')
-      }
-    }
+        async login() {
+          try {
+            await auth.login(this.username, this.password);
+            Swal.fire('Bienvenido ahora puedes realizar tus compras')
+            this.$router.push("/miscompras");
+          } catch (error) {
+            this.error = true;
+            Swal.fire('Usurio y/o contraseña incorrectos')
+
+          }
+        },
+
+        mostrarPassword(){
+            if(this.eye == 'eye-close.3254d7e6'){
+                this.eye = 'eye-open.362298e0'
+                this.tipoInput = 'text'
+            } else {
+                this.eye = 'eye-close.3254d7e6'
+                this.tipoInput = 'password'
+            }
+        },
   },
 
   
@@ -130,6 +145,7 @@ export default {
         font-size: 14px;
         font-weight: bold;
         margin: 60px 0px 0px 0px;
+        outline: unset;
     }
 
     .col-sm-4-body-secondtext {
@@ -156,6 +172,19 @@ export default {
 
     .link {
         text-decoration: none;
+    }
+
+    .input-constraseña {
+        position: relative;
+    }
+
+    .img-eye {
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        right: 20px;
+        top: 12px;
+        cursor: pointer;
     }
 
     @media screen and (min-device-width:1366px){
