@@ -35,7 +35,12 @@ const routes = [
     path: '/pasareladepagos',
     name: 'Pasarela',
     component: () => import('../views/Pasarela.vue')
-  }
+  },
+  {
+    path: '/pagoenefectivo',
+    name: 'PagoenEfectivo',
+    component: () => import('../views/PagoenEfectivo.vue')
+  },
 ]
 
 const router = new VueRouter({

@@ -20,7 +20,7 @@
 
                                         <div class="p-2 d-flex col-11 mx-auto bd-highlight mb-3">
                                                 <div class="mr-auto p-3 ml-5 bd-highlight">
-                                                          <img src="../assets/Componente 1 – 1.svg" >
+                                                          
                                                 </div>
                                                 <div class="p-2 bd-highlight border border-warning">
                                                            <img src="../assets/Grupo 18179.png" >
@@ -62,7 +62,7 @@
 
                                                                     <div class="col-md-3 text-left ">
                                                                       <img src="../assets/Trazado 5025.svg">
-                                                                      <a href="#" class="Pasarelalink">Pasarelas de Pagos</a>
+                                                                      <a href="./miscompras" class="Pasarelalink">Mis Compras</a>
                                                                     </div>
 
                                                                     
@@ -124,11 +124,11 @@
                <div class="col-md-12 pb-5 d-flex justify-content-start  text-left  ">
                  
                    <div class="col-md-6 row ">
-                    <button type="button" class="bottom-1 btn btn-secondary btn-lg btn-block ">Tarjeta de crédito</button>
+                        <a href="./pasarela" class="bottom-1 btn btn-secondary btn-lg btn-block">Tarjeta de Débito</a>
                    </div>
 
                    <div class="col-md-6">
-                    <button type="button" class="bottom-2 btn btn-secondary btn-lg btn-block ">Tarjeta de débito</button>
+                    <a href="./pagoenefectivo" class="bottom-1 btn btn-secondary btn-lg btn-block">Pago en Efectivos</a>
                    </div>
 
               </div>
@@ -255,25 +255,50 @@
 
                     <!--Img carrito-1 -->
                         
-                            <div class=" Cajon-Carrito" >
+        
 
-                                    <div class="cajon-img">
-                                        <img src="../assets/Enmascarar grupo 107.png" class="rounded mx-auto d-block" alt="...">
-                                    </div>
+            <div :class="['carrito', clase]">
+        <table id="lista-carrito" class="table">
+            <thead>
+                <tr>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th style="width:80px;">Precio</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="body">
+                <ItemCompra
+                    v-for="curso in carrito" :key="curso.id"
+                    :curso="curso"
+                />
+            </tbody>
+            <tfoot>
+                
+                <th v-if="carrito.length === 0" class="text-cartvacio" scope="row" colspan="5">Carrito vacío - Empieze a comprar!</th>
+                
+                <th v-else scope="row" colspan="5"> 
+                    <button 
+                        @click="vaciarCarritoAction"
+                        class="vaciar-carrito"
+                    >
+                        Vaciar Carrito
+                    </button> 
+                    <router-link to="/miscompras">
+                        <button 
+                            class="comprar-carrito"
+                        >
+                            Ir a pagar
+                        </button>
+                    </router-link> 
+                </th> 
+            </tfoot>
+        </table>
+    </div>
 
-                                    <div class="Cajon-textos ml-4">
-
-                                        <p class="Text-Carrito">Gestión de Envases, Empaques y <br> Embalajes</p>
-                                        <p class="Text-dsc">Dto. 25%</p>
-
-                                      <div class="Tex-precio-link ">
-                                        <a href="#" class="Link-eliminar">Eliminar</a>
-                                        <p class="Text-costo ">S/ 269.00</p>
-                                      </div>
-
-                                    </div>
+           
                                
-                            </div>
+        </div>
 
                    <!--Img carrito-1 --> 
 
@@ -289,17 +314,7 @@
 
                                  
 
-                                 <div class="input-group mt-5">
-                                      <div class="custom-file">
-                                              <input type="text" class="Text-campo form-control form-control-lg" id="colFormLabelLg" placeholder="Agrega un código de descuento">
-                                      </div>
-                                      <div class="input-group-append">
-                                               <button class="btn-4 btn-outline-secondary" type="button" id="inputGroupFileAddon04">
-
-                                                   <img src="../assets/Trazado.png" class="float-left d-block" alt="...">
-                                               </button>
-                                      </div>
-                                  </div> 
+                                 
   
     
                              
@@ -311,13 +326,6 @@
 
                              <!--AQUI PRECIO DE CARRITO -->
 
-                            <div class="Precio-Number flex-wrap mt-5">
-
-
-                                <p class="PTex-1">Precio Final</p>
-                                <p class="PTex-2">S/ 600.00</p>
-                            
-                            </div>
                              <!--TERMINA BOTTOM CARRITO -->
                                     
                             
@@ -337,7 +345,7 @@
 
                  
     
-      </div>
+      
 
 </div>
     
@@ -348,31 +356,7 @@
         <!--Aqui termina contenido -->  
 
 
-        <!--AQUI MI FOOTER --> 
-        <div class=" Footer container-fluid">
-
-
-
-            <div class="pt-3 sm col-11 mx-auto">
-
-
-                  <div class="d-flex bd-highlight mb-3">
-
-                        <div class="p-2 bd-highlight">
-                           <img src="../assets/Grupo 10291.svg" >
-                        </div>
-                        
-                        
-                  </div>
-
-           
-            </div>
-
-
-
-
-        </div>
-        <!--AQUI MI FOOTER --> 
+       
 
 
           
@@ -385,7 +369,7 @@
 
              
 
-
+ 
 
     </div>
 
@@ -393,19 +377,35 @@
   
 
 
-            
+          
 
 
  
 </template>
 
 <script>
+
+import ItemCompra from "@/components/ItemCompra.vue"
+import { mapActions, mapState } from "vuex"
+
+
+
 export default {
-  name: 'Pasarela',
-  props: {
-    msg: String
-  }
+    name: 'Carrito',
+    props: {
+        clase: ''
+    },
+    components: {
+        ItemCompra
+    },
+    methods: {
+        ...mapActions(['vaciarCarritoAction'])
+    },
+    computed: {
+        ...mapState(['carrito'])
+    },
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -818,6 +818,71 @@ padding-left: 0px;
 }
 /*OCULTA TODO LOS FORMULARIOS TERMINA RESPONSIVE*/
 
+
+ .carrito {
+        background: var(--bgbeneficio);
+        padding: 0 10px;
+        width: 340px;
+        margin: 0 auto;
+        position: absolute;
+        top: 35px;
+        right: -52px;
+        border: 1px solid var(--colorText3);
+        border-radius: 5px;
+    }   
+
+    .lista-carrito {
+        font-size: 12px;
+    }   
+
+    th {
+        font-size: 12px;
+        padding: 3px 0;
+        color: var(--colorText2);
+    }   
+
+    tbody {
+        color: var(--colorText4);
+    }   
+
+    button {
+        width: 100%;
+        height: 40px;
+        margin-top: 10px;
+        border: unset;
+        border-radius: 5px;
+        color: var(--colorText1);
+    }   
+
+    .vaciar-carrito {
+        background: var(--button2);
+        outline: unset;
+    }   
+
+    .comprar-carrito {
+        background: var(--button1);
+        outline: unset;
+    }   
+
+    .text-cartvacio {
+        font-size: 16px;
+        color: var(--colorText5);
+        padding-top: 20px;
+    }   
+
+    .desactive {
+        display: none;
+    }   
+
+    .active {
+        display: block;
+    }
+
+    @media screen and (min-device-width:780px){
+        .carrito {
+            top: 30px;
+        }
+    }
  }
  
 
