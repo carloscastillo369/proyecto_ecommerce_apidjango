@@ -20,7 +20,7 @@
 
                                         <div class="p-2 d-flex col-11 mx-auto bd-highlight mb-3">
                                                 <div class="mr-auto p-3 ml-5 bd-highlight">
-                                                          <img src="../assets/Componente 1 – 1.svg" >
+                                                          
                                                 </div>
                                                 <div class="p-2 bd-highlight border border-warning">
                                                            <img src="../assets/Grupo 18179.png" >
@@ -124,11 +124,11 @@
                <div class="col-md-12 pb-5 d-flex justify-content-start  text-left  ">
                  
                    <div class="col-md-6 row ">
-                    <button type="button" class="bottom-1 btn btn-secondary btn-lg btn-block ">Tarjeta de crédito</button>
+                        <a href="./pasarela" class="bottom-1 btn btn-secondary btn-lg btn-block">Tarjeta de Débito</a>
                    </div>
 
                    <div class="col-md-6">
-                    <button type="button" class="bottom-2 btn btn-secondary btn-lg btn-block ">Tarjeta de débito</button>
+                    <a href="./pagoenefectivo" class="bottom-1 btn btn-secondary btn-lg btn-block">Pago en Efectivos</a>
                    </div>
 
               </div>
@@ -348,31 +348,7 @@
         <!--Aqui termina contenido -->  
 
 
-        <!--AQUI MI FOOTER --> 
-        <div class=" Footer container-fluid">
-
-
-
-            <div class="pt-3 sm col-11 mx-auto">
-
-
-                  <div class="d-flex bd-highlight mb-3">
-
-                        <div class="p-2 bd-highlight">
-                           <img src="../assets/Grupo 10291.svg" >
-                        </div>
-                        
-                        
-                  </div>
-
-           
-            </div>
-
-
-
-
-        </div>
-        <!--AQUI MI FOOTER --> 
+       
 
 
           
@@ -401,7 +377,7 @@
 
 <script>
 export default {
-  name: 'Pasarela',
+  name: 'HelloWorld',
   props: {
     msg: String
   }
